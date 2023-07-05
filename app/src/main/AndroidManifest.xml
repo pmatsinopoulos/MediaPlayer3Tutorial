@@ -21,6 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name="com.mixlr.panos.mediaplayer3tutorial.FantasticService" />
     </application>
 
 </manifest>
