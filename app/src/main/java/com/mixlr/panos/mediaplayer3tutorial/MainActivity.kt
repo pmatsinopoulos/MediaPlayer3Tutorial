@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var session: MediaSession
     private lateinit var binding: ActivityMainBinding
     private lateinit var intent: Intent
+    private val grade = 10
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnStartService.setOnClickListener {
             intent = Intent(this, FantasticService::class.java).also { intent ->
+                intent.putExtra("grade", grade)
                 startService(intent)
             }
         }
