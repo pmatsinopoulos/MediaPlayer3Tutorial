@@ -1,7 +1,9 @@
 package com.mixlr.panos.mediaplayer3tutorial
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.session.MediaSession
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var intentForSimpleService: Intent
     private lateinit var intentForForegroundService: Intent
     private val grade = 10
+    private var fantasticBoundServiceConnection: FantasticBoundServiceConnection? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,5 +50,34 @@ class MainActivity : AppCompatActivity() {
                 stopService(intentForForegroundService)
             }
         }
+
+        fantasticBoundServiceConnection = FantasticBoundServiceConnection()
+
+        binding.btnRandomNumber.setOnClickListener {
+            fantasticBoundServiceConnection?.let { fbsc ->
+                binding.tvRandomNumber.text = fbsc.randomNumber().toString()
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        Log.d(logTag, "MainActivity on Start")
+
+        Intent(this, FantasticBoundService::class.java).also { intent ->
+            fantasticBoundServiceConnection?.let { fbsc ->
+                bindService(
+                    intent,
+                    fbsc, Context.BIND_AUTO_CREATE
+                )
+            }
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        fantasticBoundServiceConnection?.let(::unbindService)
     }
 }
+

@@ -30,6 +30,7 @@
 
         <service android:name="com.mixlr.panos.mediaplayer3tutorial.FantasticService" />
         <service android:name="com.mixlr.panos.mediaplayer3tutorial.FantasticForegroundService" />
+        <service android:name="com.mixlr.panos.mediaplayer3tutorial.FantasticBoundService" />
     </application>
 
 </manifest>
