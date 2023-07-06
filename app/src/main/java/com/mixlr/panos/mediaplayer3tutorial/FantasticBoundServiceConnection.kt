@@ -9,13 +9,13 @@ class FantasticBoundServiceConnection : ServiceConnection {
     private lateinit var boundService: FantasticBoundService
 
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-        Log.d(MainActivity.logTag, "onServiceConnected")
+        Log.d(MainActivity.logTag, "FantasticBoundServiceConnection: onServiceConnected")
         val binder = service as FantasticBoundService.LocalBinder
         boundService = binder.getService()
     }
 
     override fun onServiceDisconnected(name: ComponentName?) {
-        Log.d(MainActivity.logTag, "onServiceDisconnected")
+        Log.d(MainActivity.logTag, "FantasticBoundServiceConnection: onServiceDisconnected")
     }
 
     fun randomNumber() = boundService.randomNumber

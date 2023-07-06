@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var intentForForegroundService: Intent
     private val grade = 10
     private var fantasticBoundServiceConnection: FantasticBoundServiceConnection? = null
+    private var fantasticMessengerServiceConnection: FantasticMessengerServiceConnection? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,11 +53,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         fantasticBoundServiceConnection = FantasticBoundServiceConnection()
+        fantasticMessengerServiceConnection = FantasticMessengerServiceConnection()
 
         binding.btnRandomNumber.setOnClickListener {
             fantasticBoundServiceConnection?.let { fbsc ->
                 binding.tvRandomNumber.text = fbsc.randomNumber().toString()
             }
+        }
+
+        binding.btnSayHello.setOnClickListener {
+            fantasticMessengerServiceConnection?.sayHello()
         }
     }
 
@@ -73,11 +79,22 @@ class MainActivity : AppCompatActivity() {
                 )
             }
         }
+
+        Intent(this, FantasticMessengerService::class.java).also { intent ->
+            fantasticMessengerServiceConnection?.let { fmsc ->
+                bindService(
+                    intent,
+                    fmsc,
+                    Context.BIND_AUTO_CREATE
+                )
+            }
+        }
     }
 
     override fun onStop() {
         super.onStop()
         fantasticBoundServiceConnection?.let(::unbindService)
+        fantasticMessengerServiceConnection?.let(::unbindService)
     }
 }
 
