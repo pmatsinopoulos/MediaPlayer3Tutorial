@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MediaPlayer3Tutorial</string>
+    <string name="fg_service_notification_title">FG Service Title</string>
+    <string name="fg_service_notification_text">FG Service Text</string>
+    <string name="fg_service_notification_ticker">FG Service Ticker</string>
+    <string name="channel_name">Media 3 Demo Notifications</string>
+    <string name="channel_description">Media 3 Demo Notifications of any Kind</string>
 </resources>

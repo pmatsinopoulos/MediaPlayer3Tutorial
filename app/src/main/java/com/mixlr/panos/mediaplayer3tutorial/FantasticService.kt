@@ -12,7 +12,7 @@ class FantasticService() : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d(MainActivity.logTag, "Starting Fantastic Service")
+        Log.d(MainActivity.logTag, "Starting FantasticService")
         Log.d(MainActivity.logTag, "grade is: ${intent?.getIntExtra("grade", -1)}")
 
         return super.onStartCommand(intent, flags, startId)
@@ -24,7 +24,7 @@ class FantasticService() : Service() {
     }
 
     override fun onDestroy() {
-        Log.d(MainActivity.logTag, "Destroying Fantastic Service")
+        Log.d(MainActivity.logTag, "Destroying FantasticService")
         super.onDestroy()
     }
 }

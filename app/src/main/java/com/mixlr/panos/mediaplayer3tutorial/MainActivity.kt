@@ -1,10 +1,10 @@
 package com.mixlr.panos.mediaplayer3tutorial
 
 import android.content.Intent
-import androidx.media3.session.MediaSession
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.session.MediaSession
 import com.mixlr.panos.mediaplayer3tutorial.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +15,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var player: ExoPlayer
     private lateinit var session: MediaSession
     private lateinit var binding: ActivityMainBinding
-    private lateinit var intent: Intent
+    private lateinit var intentForSimpleService: Intent
+    private lateinit var intentForForegroundService: Intent
     private val grade = 10
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,13 +28,24 @@ class MainActivity : AppCompatActivity() {
         session = MediaSession.Builder(this, player).build()
 
         binding.btnStartService.setOnClickListener {
-            intent = Intent(this, FantasticService::class.java).also { intent ->
+            intentForSimpleService = Intent(this, FantasticService::class.java).also { intent ->
                 intent.putExtra("grade", grade)
                 startService(intent)
             }
         }
         binding.btnStopService.setOnClickListener {
-            stopService(intent)
+            if (::intentForSimpleService.isInitialized) {
+                stopService(intentForSimpleService)
+            }
+        }
+        binding.btnStartForegroundService.setOnClickListener {
+            intentForForegroundService = Intent(this, FantasticForegroundService::class.java)
+            startForegroundService(intentForForegroundService)
+        }
+        binding.btnStopForegroundService.setOnClickListener {
+            if (::intentForForegroundService.isInitialized) {
+                stopService(intentForForegroundService)
+            }
         }
     }
 }
