@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import android.os.Message
 import android.os.Messenger
 import android.widget.Toast
@@ -26,7 +27,7 @@ class FantasticMessengerService : Service() {
     internal class IncomingHandler(
         context: Context,
         private val applicationContext: Context = context.applicationContext
-    ) : Handler() {
+    ) : Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message) {
             when (msg.what) {
                 MSG_SAY_HELLO ->
