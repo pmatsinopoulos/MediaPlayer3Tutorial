@@ -92,9 +92,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStop() {
-        super.onStop()
+        Log.d(logTag, "MainActivity on Stop()")
         fantasticBoundServiceConnection?.let(::unbindService)
         fantasticMessengerServiceConnection?.let(::unbindService)
+        super.onStop()
     }
 }
 
