@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private var fantasticMessengerServiceConnection: FantasticMessengerServiceConnection? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d(logTag, "MainActivity onCreate")
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -96,6 +97,11 @@ class MainActivity : AppCompatActivity() {
         fantasticBoundServiceConnection?.let(::unbindService)
         fantasticMessengerServiceConnection?.let(::unbindService)
         super.onStop()
+    }
+
+    override fun onDestroy() {
+        Log.d(logTag, "MainActivity onDestroy()")
+        super.onDestroy()
     }
 }
 
