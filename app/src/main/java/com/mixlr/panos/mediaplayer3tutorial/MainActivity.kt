@@ -29,8 +29,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        player = ExoPlayer.Builder(this).build()
-        session = MediaSession.Builder(this, player).build()
+        createMediaSession()
 
         binding.btnStartService.setOnClickListener {
             intentForSimpleService = Intent(this, FantasticService::class.java).also { intent ->
@@ -102,6 +101,14 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         Log.d(logTag, "MainActivity onDestroy()")
         super.onDestroy()
+    }
+
+    private fun createMediaSession() {
+        player = ExoPlayer.Builder(this).build()
+        val customCallback = CustomMediaSessionCallback()
+        session = MediaSession.Builder(this, player)
+            .setCallback(customCallback)
+            .build()
     }
 }
 
