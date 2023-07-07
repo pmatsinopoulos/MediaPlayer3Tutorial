@@ -28,8 +28,15 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name=".PlaybackService"
+            android:exported="true"
+            android:foregroundServiceType="mediaPlayback">
+            <intent-filter>
+                <action android:name="androidx.media3.session.MediaSessionService" />
+            </intent-filter>
+        </service>
         <service android:name="com.mixlr.panos.mediaplayer3tutorial.FantasticService" />
-        <service android:name="com.mixlr.panos.mediaplayer3tutorial.FantasticForegroundService" />
         <service android:name="com.mixlr.panos.mediaplayer3tutorial.FantasticBoundService" />
         <service android:name="com.mixlr.panos.mediaplayer3tutorial.FantasticMessengerService" />
     </application>

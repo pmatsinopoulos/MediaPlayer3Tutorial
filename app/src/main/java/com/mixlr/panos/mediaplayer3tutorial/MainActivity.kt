@@ -5,8 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.session.MediaSession
 import com.mixlr.panos.mediaplayer3tutorial.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -14,11 +12,9 @@ class MainActivity : AppCompatActivity() {
         const val logTag = "MediaPlayer3Tutorial"
     }
 
-    private lateinit var player: ExoPlayer
-    private lateinit var session: MediaSession
     private lateinit var binding: ActivityMainBinding
     private lateinit var intentForSimpleService: Intent
-    private lateinit var intentForForegroundService: Intent
+    private lateinit var intentForPlaybackService: Intent
     private val grade = 10
     private var fantasticBoundServiceConnection: FantasticBoundServiceConnection? = null
     private var fantasticMessengerServiceConnection: FantasticMessengerServiceConnection? = null
@@ -28,8 +24,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        createMediaSession()
 
         binding.btnStartService.setOnClickListener {
             intentForSimpleService = Intent(this, FantasticService::class.java).also { intent ->
@@ -43,12 +37,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.btnStartForegroundService.setOnClickListener {
-            intentForForegroundService = Intent(this, FantasticForegroundService::class.java)
-            startForegroundService(intentForForegroundService)
+            intentForPlaybackService = Intent(this, PlaybackService::class.java)
+            startForegroundService(intentForPlaybackService)
         }
         binding.btnStopForegroundService.setOnClickListener {
-            if (::intentForForegroundService.isInitialized) {
-                stopService(intentForForegroundService)
+            if (::intentForPlaybackService.isInitialized) {
+                stopService(intentForPlaybackService)
             }
         }
 
@@ -102,13 +96,4 @@ class MainActivity : AppCompatActivity() {
         Log.d(logTag, "MainActivity onDestroy()")
         super.onDestroy()
     }
-
-    private fun createMediaSession() {
-        player = ExoPlayer.Builder(this).build()
-        val customCallback = CustomMediaSessionCallback()
-        session = MediaSession.Builder(this, player)
-            .setCallback(customCallback)
-            .build()
-    }
 }
-

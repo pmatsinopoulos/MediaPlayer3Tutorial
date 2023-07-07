@@ -34,25 +34,25 @@
         android:id="@+id/btnStartForegroundService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start FG Service"
+        android:text="Start Playback Service"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.103"
+        app:layout_constraintHorizontal_bias="0.072"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.572" />
+        app:layout_constraintVertical_bias="0.524" />
 
     <Button
         android:id="@+id/btnStopForegroundService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stop FG Service"
+        android:text="Stop Playback Service"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.868"
+        app:layout_constraintHorizontal_bias="0.081"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.572" />
+        app:layout_constraintVertical_bias="0.594" />
 
     <Button
         android:id="@+id/btnRandomNumber"
