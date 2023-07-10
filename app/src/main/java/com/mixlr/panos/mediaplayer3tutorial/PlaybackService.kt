@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
-import androidx.core.app.NotificationCompat
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.session.MediaSession
 import androidx.media3.session.MediaSessionService
@@ -23,26 +22,6 @@ class PlaybackService() : MediaSessionService() {
         super.onCreate()
         prepareChannel()
         createMediaSession()
-    }
-
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d(MainActivity.logTag, "Starting PlaybackService")
-
-        val notification = NotificationCompat.Builder(
-            this,
-            ONGOING_NOTIFICATION_CHANNEL_ID
-        ).apply {
-            setOngoing(true) // the notification is non-dismissable by the user
-            setSound(null)
-            setSmallIcon(com.google.android.material.R.drawable.ic_m3_chip_check)
-            setContentTitle("Not. from FG Service")
-            setContentText("Notification from FG Service")
-            setStyle(NotificationCompat.BigTextStyle().bigText("Notification from FG Service"))
-        }.build()
-
-        startForeground(1, notification)
-
-        return super.onStartCommand(intent, flags, startId)
     }
 
     override fun onBind(intent: Intent?): IBinder? {
