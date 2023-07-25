@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.media3.common.AudioAttributes
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.session.MediaController
@@ -154,6 +155,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun createSoundPlayer() {
         Log.d(logTag, "MainActivity: createSoundPlayer()")
-        soundPlayer = ExoPlayer.Builder(this).build()
+        soundPlayer = ExoPlayer.Builder(this)
+            .setAudioAttributes(AudioAttributes.DEFAULT, true)
+            .setHandleAudioBecomingNoisy(true)
+            .build()
     }
 }
