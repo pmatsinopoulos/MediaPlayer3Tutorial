@@ -30,7 +30,9 @@ class MainActivity : AppCompatActivity() {
     private var fantasticMessengerServiceConnection: FantasticMessengerServiceConnection? = null
     private lateinit var controllerFuture: ListenableFuture<MediaController>
     private lateinit var player: ExoPlayer
+    private lateinit var soundPlayer: ExoPlayer
 
+    @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(logTag, "MainActivity onCreate")
         super.onCreate(savedInstanceState)
@@ -82,9 +84,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         createPlayer()
+        createSoundPlayer()
 
         binding.pvPlayer.player = player
-
+        binding.pcvPlayer.player = soundPlayer
     }
 
     override fun onStart() {
@@ -117,6 +120,11 @@ class MainActivity : AppCompatActivity() {
         player.setMediaItem(mediaItem)
         player.prepare()
 
+        val soundPath = "file:///android_asset/sample-mp3-file.mp3"
+        val soundUri = Uri.parse(soundPath)
+        val soundMediaItem = MediaItem.fromUri(soundUri)
+        soundPlayer.setMediaItem(soundMediaItem)
+        soundPlayer.prepare()
     }
 
     override fun onStop() {
@@ -140,7 +148,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createPlayer() {
-        Log.d(MainActivity.logTag, "MainActivity: createPlayer()")
+        Log.d(logTag, "MainActivity: createPlayer()")
         player = ExoPlayer.Builder(this).build()
+    }
+
+    private fun createSoundPlayer() {
+        Log.d(logTag, "MainActivity: createSoundPlayer()")
+        soundPlayer = ExoPlayer.Builder(this).build()
     }
 }
