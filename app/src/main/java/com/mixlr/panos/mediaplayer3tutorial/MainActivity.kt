@@ -84,6 +84,14 @@ class MainActivity : AppCompatActivity() {
             fantasticMessengerServiceConnection?.sayHello()
         }
 
+        binding.btnVideoPause.setOnClickListener {
+            player.pause()
+        }
+
+        binding.btnVideoPlay.setOnClickListener {
+            player.play()
+        }
+
         createPlayer()
         createSoundPlayer()
 
