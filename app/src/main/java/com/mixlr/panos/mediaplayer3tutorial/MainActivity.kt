@@ -146,6 +146,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         Log.d(logTag, "MainActivity onDestroy()")
+        player.release()
+        soundPlayer.release()
         super.onDestroy()
     }
 
