@@ -169,5 +169,7 @@ class MainActivity : AppCompatActivity() {
             .setAudioAttributes(AudioAttributes.DEFAULT, true)
             .setHandleAudioBecomingNoisy(true)
             .build()
+        val listener = SoundPlayerListener()
+        soundPlayer.addListener(listener)
     }
 }
