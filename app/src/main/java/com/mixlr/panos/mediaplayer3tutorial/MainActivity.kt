@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         createSoundPlayer()
 
         binding.pvPlayer.player = player
-        binding.pcvPlayer.player = soundPlayer
+        binding.pvSoundPlayer.player = soundPlayer
     }
 
     override fun onStart() {
